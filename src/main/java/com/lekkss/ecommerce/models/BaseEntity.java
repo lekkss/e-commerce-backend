@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Integer id;
     private LocalDateTime createdAt  = LocalDateTime.now();
     private LocalDateTime updatedAt;
