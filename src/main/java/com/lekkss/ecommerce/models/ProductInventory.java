@@ -6,22 +6,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class ProductInventory {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class ProductInventory extends BaseEntity {
     private Integer quantity;
     @OneToOne(mappedBy = "inventory")
     private Product product;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
 }

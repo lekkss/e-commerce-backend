@@ -3,18 +3,16 @@ package com.lekkss.ecommerce.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class OrderItems {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class OrderItems extends BaseEntity {
     private Integer quantity;
     @ManyToOne
     @JoinColumn(name = "orde_id")
@@ -22,6 +20,4 @@ public class OrderItems {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

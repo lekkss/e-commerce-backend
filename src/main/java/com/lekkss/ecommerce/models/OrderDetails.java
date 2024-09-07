@@ -3,20 +3,19 @@ package com.lekkss.ecommerce.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class OrderDetails {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class OrderDetails extends BaseEntity {
     private BigDecimal total;
     @OneToOne
     @JoinColumn(name = "payment_id")
@@ -26,6 +25,4 @@ public class OrderDetails {
     private User user;
     @OneToMany(mappedBy = "orderDetails")
     private List<OrderItems> orderitems;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

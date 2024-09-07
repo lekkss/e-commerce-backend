@@ -7,25 +7,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class PaymentDetails {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class PaymentDetails extends BaseEntity {
     private Integer orderId;
     private BigDecimal amount;
     private String provider;
     private String status;
     @OneToOne(mappedBy = "paymentDetails")
-    private OrderDetails orderDetails;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private OrderDetails orderDetails ;
 }

@@ -3,17 +3,18 @@ package com.lekkss.ecommerce.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer id;
@@ -31,6 +32,4 @@ public class User {
     private ShoppingSession session;
     @OneToOne(mappedBy = "user")
     private OrderDetails orderDetails;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }
