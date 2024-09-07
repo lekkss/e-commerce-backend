@@ -42,6 +42,6 @@ The project follows a well-structured relational database design, including the 
 
 Before running the project, ensure you have the following installed:
 
-Java 17+ (for Spring Boot)
-Maven (for project dependencies)
+Java 17+ (for Spring Boot) \
+Maven (for project dependencies) \
 MySQL (or any relational database supported by JPA)
