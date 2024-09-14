@@ -8,4 +8,6 @@ public interface UserAddressService  {
     UserAddressDto addAddress(UserAddressDto userAddressDto);
     List<UserAddressDto> getAddressByUserId(Integer userId);
     List<UserAddressDto> getAllAddresses();
+    UserAddressDto updateAddress(UserAddressDto userAddressDto, Integer id);
+    void deleteAddress(Integer id);
 }

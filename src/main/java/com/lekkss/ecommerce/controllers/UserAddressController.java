@@ -1,14 +1,13 @@
 package com.lekkss.ecommerce.controllers;
 
 import com.lekkss.ecommerce.dto.UserAddressDto;
-import com.lekkss.ecommerce.models.UserAddress;
+import com.lekkss.ecommerce.payloads.APIResponse;
 import com.lekkss.ecommerce.services.UserAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -16,24 +15,83 @@ import java.util.List;
 @RequestMapping("/address")
 public class UserAddressController {
 
-    @Autowired
-    private UserAddressService userAddressService;
+    private final UserAddressService userAddressService;
 
-    @PostMapping
-    public ResponseEntity<UserAddressDto> createAddress(@RequestBody UserAddressDto userAddress) {
-        UserAddressDto address =  userAddressService.addAddress(userAddress);
-        return  new ResponseEntity<>(address, HttpStatus.OK);
+    public UserAddressController(UserAddressService userAddressService) {
+        this.userAddressService = userAddressService;
     }
 
+    @PostMapping
+    public ResponseEntity<APIResponse<UserAddressDto>> createAddress(@RequestBody UserAddressDto userAddress) {
+        APIResponse<UserAddressDto> apiResponse = new APIResponse<>();
+        try {
+            UserAddressDto address =  userAddressService.addAddress(userAddress);
+            apiResponse.setData(address);
+            apiResponse.setMessage("Address created successfully");
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return  new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
+
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<UserAddressDto>> getAllAddresses(@PathVariable("id") Integer id) {
-        List<UserAddressDto> addresses = userAddressService.getAddressByUserId(id);
-        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    public ResponseEntity<APIResponse<List<UserAddressDto>>> getAllAddresses(@PathVariable("id") Integer id) {
+        APIResponse<List<UserAddressDto>> apiResponse = new APIResponse<>();
+        try {
+            List<UserAddressDto> addresses = userAddressService.getAddressByUserId(id);
+            apiResponse.setData(addresses);
+            apiResponse.setMessage("User address fetched successfully");
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<UserAddressDto>> getAllAddresses() {
-        List<UserAddressDto> addresses = userAddressService.getAllAddresses();
-        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    public ResponseEntity<APIResponse<List<UserAddressDto>>> getAllAddresses() {
+        APIResponse<List<UserAddressDto>> apiResponse = new APIResponse<>();
+        try {
+            List<UserAddressDto> addresses = userAddressService.getAllAddresses();
+            apiResponse.setData(addresses);
+            apiResponse.setMessage("Addresses fetched successfully");
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<APIResponse<UserAddressDto>> updateAddress(
+            @PathVariable("id") Integer id,
+            @RequestBody UserAddressDto address) {
+        APIResponse<UserAddressDto> apiResponse = new APIResponse<>();
+        try {
+            UserAddressDto savedAddress = userAddressService.updateAddress(address, id);
+            apiResponse.setData(savedAddress);
+            apiResponse.setMessage("Address updated successfully");
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<APIResponse<UserAddressDto>> deleteAddress(@PathVariable("id") Integer id) {
+        APIResponse<UserAddressDto> apiResponse = new APIResponse<>();
+        try {
+            userAddressService.deleteAddress(id);
+            apiResponse.setMessage("Address deleted successfully");
+        }
+        catch (Exception e) {
+            apiResponse.setMessage("error deleting address");
+            return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }
