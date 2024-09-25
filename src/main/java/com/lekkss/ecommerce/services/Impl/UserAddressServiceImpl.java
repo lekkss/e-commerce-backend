@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UserAddressImpl implements UserAddressService {
+public class UserAddressServiceImpl implements UserAddressService {
 
     private UserAddressRepository userAddressRepository;
 

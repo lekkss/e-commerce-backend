@@ -4,17 +4,15 @@ import com.lekkss.ecommerce.dto.UserDto;
 import com.lekkss.ecommerce.models.User;
 import com.lekkss.ecommerce.repositories.UserRepository;
 import com.lekkss.ecommerce.services.UserService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
 
 //    @Autowired
