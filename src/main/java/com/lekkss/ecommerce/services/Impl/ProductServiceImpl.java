@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
        product.setUpdatedAt(LocalDateTime.now());
        product.setName(productDto.getName());
        product.setDescription(productDto.getDescription());
-       product.setSKU(productDto.getSKU());
+       product.setSKU(productDto.getSku());
        product.setPrice(productDto.getPrice());
        Product updatedProduct = productRepository.save(product);
        return modelMapper.map(updatedProduct, ProductDto.class);

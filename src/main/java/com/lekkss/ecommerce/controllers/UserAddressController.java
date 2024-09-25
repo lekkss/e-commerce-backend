@@ -28,12 +28,11 @@ public class UserAddressController {
             UserAddressDto address =  userAddressService.addAddress(userAddress);
             apiResponse.setData(address);
             apiResponse.setMessage("Address created successfully");
+            return  new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return  new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
 
@@ -44,11 +43,11 @@ public class UserAddressController {
             List<UserAddressDto> addresses = userAddressService.getAddressByUserId(id);
             apiResponse.setData(addresses);
             apiResponse.setMessage("User address fetched successfully");
+            return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @GetMapping
@@ -58,11 +57,11 @@ public class UserAddressController {
             List<UserAddressDto> addresses = userAddressService.getAllAddresses();
             apiResponse.setData(addresses);
             apiResponse.setMessage("Addresses fetched successfully");
+            return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @PutMapping("{id}")
@@ -74,11 +73,11 @@ public class UserAddressController {
             UserAddressDto savedAddress = userAddressService.updateAddress(address, id);
             apiResponse.setData(savedAddress);
             apiResponse.setMessage("Address updated successfully");
+            return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
@@ -87,11 +86,11 @@ public class UserAddressController {
         try {
             userAddressService.deleteAddress(id);
             apiResponse.setMessage("Address deleted successfully");
+            return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
         }
         catch (Exception e) {
             apiResponse.setMessage("error deleting address");
             return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

@@ -3,7 +3,7 @@ package com.lekkss.ecommerce.controllers;
 import com.lekkss.ecommerce.dto.ProductCategoryDto;
 import com.lekkss.ecommerce.payloads.APIResponse;
 import com.lekkss.ecommerce.services.ProductCategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product_categories")
+@AllArgsConstructor
 public class ProductCategoryController {
 
-    @Autowired
     private  ProductCategoryService productCategoryService;
 
     @PostMapping
