@@ -3,7 +3,6 @@ package com.lekkss.ecommerce.controllers;
 import com.lekkss.ecommerce.dto.UserAddressDto;
 import com.lekkss.ecommerce.payloads.APIResponse;
 import com.lekkss.ecommerce.services.UserAddressService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
