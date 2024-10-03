@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -19,11 +21,12 @@ public class Product extends BaseEntity {
     private String description;
     private Double price;
     private String SKU;
+    private String imageUrl;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private ProductCategory category;
     @OneToOne
-    @JoinColumn(name="inventory_id")
+    @JoinColumn(name = "inventory_id")
     private ProductInventory inventory;
     @ManyToOne
     @JoinColumn(name = "discount_id")

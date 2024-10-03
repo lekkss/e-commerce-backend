@@ -33,17 +33,15 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
-    public ProductInventoryDto updateProductInventory(ProductInventoryDto productInventoryDto, Integer productId) {
-        // Fetch the existing product
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RecordNotFoundException("Product", "productId", productId));
-
+    public ProductInventoryDto updateProductInventory(ProductInventoryDto productInventoryDto, Integer id) {
         // Fetch the existing inventory item, assuming 'id' refers to the specific inventory record
-        ProductInventory existingInventory = productInventoryRepository.findById(productInventoryDto.getId())
-                .orElseThrow(() -> new RecordNotFoundException("ProductInventory", "id", productInventoryDto.getId()));
+        ProductInventory existingInventory = productInventoryRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("ProductInventory", "id", id));
 
-        // Update the quantity and other fields
+        // Update the quantity from the DTO
         existingInventory.setQuantity(productInventoryDto.getQuantity());
+
+        // Update other fields, e.g., updatedAt
         existingInventory.setUpdatedAt(LocalDateTime.now());
 
         // Save the updated inventory item
@@ -54,10 +52,18 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
 
+
     @Override
     public ProductInventoryDto getProductInventoryById(Integer id) {
-        ProductInventory productInventory =   productInventoryRepository.findById(id)
-                .orElseThrow(()-> new RecordNotFoundException("ProductInventory", "id", id));
+        ProductInventory productInventory = productInventoryRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("ProductInventory", "id", id));
+
+        // Ensure that the product is initialized before mapping
+        if (productInventory.getProduct() != null) {
+            productInventory.getProduct().getId(); // Trigger lazy loading if necessary
+        }
+
         return modelMapper.map(productInventory, ProductInventoryDto.class);
     }
+
 }

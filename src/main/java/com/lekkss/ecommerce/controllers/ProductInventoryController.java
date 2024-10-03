@@ -35,7 +35,7 @@ public class ProductInventoryController {
         try {
             ProductInventoryDto productInventoryDto = productInventoryService.getProductInventoryById(id);
             apiResponse.setData(productInventoryDto);
-            apiResponse.setMessage("Product inventory retrieved successfully "+ productInventoryDto);
+            apiResponse.setMessage("Product inventory retrieved successfully ");
             return new ResponseEntity<>(apiResponse, HttpStatus.OK);
         }
         catch (Exception e) {
@@ -44,13 +44,13 @@ public class ProductInventoryController {
         }
     }
 
-    @PutMapping("{productId}")
+    @PutMapping("{id}")
     public ResponseEntity<APIResponse<ProductInventoryDto>> updateProductInventory(
             @RequestBody ProductInventoryDto productInventoryDto,
-            @PathVariable Integer productId) {
+            @PathVariable Integer id) {
         APIResponse<ProductInventoryDto> apiResponse = new APIResponse<>();
         try {
-            ProductInventoryDto updatedInventory = productInventoryService.updateProductInventory(productInventoryDto, productId);
+            ProductInventoryDto updatedInventory = productInventoryService.updateProductInventory(productInventoryDto,id);
             apiResponse.setData(updatedInventory);
             apiResponse.setMessage("Product inventory updated successfully");
             return new ResponseEntity<>(apiResponse, HttpStatus.OK);

@@ -15,7 +15,9 @@ public class ProductDto {
     private String description;
     private Double price;
     private String sku;
+    private String imageUrl;
     private ProductCategoryDto productCategory;
+    private Integer quantity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

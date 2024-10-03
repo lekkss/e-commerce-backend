@@ -1,6 +1,7 @@
 package com.lekkss.ecommerce.controllers;
 
 import com.lekkss.ecommerce.dto.ProductDto;
+import com.lekkss.ecommerce.dto.ProductInventoryDto;
 import com.lekkss.ecommerce.payloads.APIResponse;
 import com.lekkss.ecommerce.services.ProductService;
 import lombok.AllArgsConstructor;

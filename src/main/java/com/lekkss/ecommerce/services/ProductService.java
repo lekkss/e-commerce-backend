@@ -1,6 +1,7 @@
 package com.lekkss.ecommerce.services;
 
 import com.lekkss.ecommerce.dto.ProductDto;
+import com.lekkss.ecommerce.dto.ProductInventoryDto;
 
 import java.util.List;
 
